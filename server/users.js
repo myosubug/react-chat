@@ -1,5 +1,29 @@
 const users = [];
-const addUser = () => {};
-const removeUser = () => {};
-const getUser = () => {};
-const getUserInRoom = () => {};
+const addUser = ({id, name, room}) => {
+    name = name.trim().toLowerCase();
+    room = room.trim().toLowerCase();
+
+    const existing = users.find((user => user.room === room && user.name === name));
+    if (existing){
+        return {error: 'user name already existed'};
+    }
+
+    const user = {id, name, room};
+    users.push(user);
+
+    return {user};
+};
+const removeUser = (id) => {
+    const index = users.findIndex((user) => user.id === id);
+    if (index !== -1){
+        return users.splice(index,1)[0];
+    }
+};
+const getUser = (id) => {
+    return users.find((user) => user.id === id)
+};
+const getUserInRoom = (room) => {
+    return users.filter((user)=> user.room === room)
+};
+
+module.exports = {addUser, removeUser, getUser, getUserInRoom};

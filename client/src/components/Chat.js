@@ -21,17 +21,20 @@ const Chat = ({location}) => {
 
     useEffect(() => {
         const { name, room } = queryString.parse(location.search);
-    
         socket = io(ENDPOINT);
-    
         setRoom(room);
         setName(name);
         currentUser = name;
     
         socket.emit('join', { name, room }, (error) => {
           if(error) {
-            alert(error);
+            ;
           }
+        });
+
+        socket.on('join', (duplicate) => {
+          setName(duplicate.randomName);
+          currentUser = duplicate.randomName;
         });
       }, [ENDPOINT, location.search]);
       

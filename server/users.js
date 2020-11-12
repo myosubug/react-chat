@@ -1,16 +1,19 @@
 const users = [];
+
 const addUser = ({id, name, room}) => {
     name = name.trim().toLowerCase();
     room = room.trim().toLowerCase();
+    let user = {id, name, room};
+    let randomName;
+    let randomDigit;
 
-    const existing = users.find((user => user.room === room && user.name === name));
+    const existing = users.find((user => user.name === name));
     if (existing){
-        return {error: 'user name already existed'};
-    }
-
-    const user = {id, name, room};
+        randomDigit = Math.floor(Math.random() * Math.floor(9999)).toString();
+        randomName = "random" + randomDigit;
+        user.name = randomName;
+    } 
     users.push(user);
-
     return {user};
 };
 

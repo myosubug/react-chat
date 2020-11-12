@@ -7,16 +7,18 @@ const server = http.createServer(app);
 const io = socketio(server);
 const router = require('./router');
 const { disconnect } = require('process');
+const { urlencoded } = require('express');
 const PORT = process.env.PORT || 8080;
+
+
 
 
 io.on('connection', (socket) => {
     socket.on('join', ({name, room}, callback) => {
         const {error, user} = addUser({id: socket.id, name, room});
-        if (error) { 
-            socket.emit('message', {user: 'admin', text: `${error}`, oldName: "admin"});
+        if (user.name.includes("random")){
+            socket.emit('join', {randomName: user.name});
         }
-        
         socket.emit('message', {user: 'admin', text: `${user.name} welcome to the chat!`, oldName: "admin"});
         socket.broadcast.to(user.room).emit('message', {user:'admin', text:`${user.name} just have joined the chat!`, oldName: "admin"});
         io.to(user.room).emit('roomData', { room: user.room, users: getUserInRoom(user.room) });
@@ -26,9 +28,6 @@ io.on('connection', (socket) => {
 
     socket.on('sendMessage', (message, currentUser, callback) => {
         let user = getUser(socket.id);
-        console.log(user);
-        console.log(currentUser);
-        console.log(message);
         let oldName = user.name;
         if (message.includes("/name") && user.name === currentUser){
           let splited = message.split(/(\s+)/).filter( e => e.trim().length > 0);
@@ -50,6 +49,7 @@ io.on('connection', (socket) => {
             io.to(user.room).emit('roomData', { room: user.room, users: getUserInRoom(user.room)});
           }
     });
+   
 });
 
 app.use(router);

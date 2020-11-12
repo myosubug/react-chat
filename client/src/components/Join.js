@@ -7,12 +7,12 @@ const Join = () => {
     const room = 'seng513';
 
     return (
-        <div className="joinOuterContainer">
-            <div className="joinInnerContainer">
+        <div className="joinOuterBox">
+            <div className="joinInnerBox">
                 <h1 className="heading">
                     <div><input placeholder="Name" className="joinInput" type="test" onChange={(event) => setName(event.target.value)}/></div>
                     <Link onClick={event => (!name || !room) ? event.preventDefault() : null} to={`/chat?name=${name}&room=${room}`}>
-                        <button className="button mt-20" type="submit">Join the party!</button>
+                        <button className="button" type="submit">Join the night chat!</button>
                     </Link>
                 </h1>
             </div>

@@ -1,22 +1,20 @@
 import React from 'react';
-import onlineIcon from '../../src/icons/onlineIcon.png';
 import './userlist.css';
 
 const UserList = ({ users }) => (
-  <div className="textContainer">
+  <div className="userListBox">
     <div>
-      <h2>Online users<span role="img" aria-label="emoji"> 🤩</span></h2>
+      <h2>Currently online<span role="img" aria-label="admin-face"> 🌝 </span></h2>
     </div>
     {
       users
         ? (
           <div>
-            <div className="activeContainer">
+            <div className="userList">
               <h2>
                 {users.map(({name}) => (
-                  <div key={name} className="activeItem">
-                    {name}
-                    <img alt="Online Icon" src={onlineIcon}/>
+                  <div key={name} className="activeUser">
+                    {name} <span role="img" aria-label="fire"> 🔥 </span>
                   </div>
                 ))}
               </h2>

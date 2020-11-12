@@ -1,14 +1,13 @@
-.infoBar {
+.infoBox {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #2979FF;
-    border-radius: 4px 4px 0 0;
+    background: #7e2323;
     height: 60px;
     width: 100%;
   }
   
-.leftInnerContainer {
+.leftBox {
   flex: 0.5;
   display: flex;
   align-items: center;
@@ -16,7 +15,7 @@
   color: white;
 }
 
-.rightInnerContainer {
+.rightBox {
   display: flex;
   flex: 0.5;
   justify-content: flex-end;

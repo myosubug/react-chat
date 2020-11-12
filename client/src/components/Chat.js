@@ -76,8 +76,8 @@ const Chat = ({location}) => {
     }
     
     return (
-      <div className="outerContainer">
-        <div className="container">
+      <div className="outerBox">
+        <div className="mainBox">
             <InfoBar room={room} />
             <Message messages={messages} name={name} userColor={userColor}/>
             <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />

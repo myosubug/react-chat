@@ -13,17 +13,32 @@ const addUser = ({id, name, room}) => {
 
     return {user};
 };
+
+const changeUserName = (id, newName) =>{
+    let user = getUser(id);
+    const existing = users.find((user => user.name === newName));
+    if (existing){
+        return ;
+    } else {
+        user.name = newName;
+    }
+    
+};
+
+
 const removeUser = (id) => {
     const index = users.findIndex((user) => user.id === id);
     if (index !== -1){
         return users.splice(index,1)[0];
     }
 };
+
 const getUser = (id) => {
     return users.find((user) => user.id === id)
 };
+
 const getUserInRoom = (room) => {
     return users.filter((user)=> user.room === room)
 };
 
-module.exports = {addUser, removeUser, getUser, getUserInRoom};
+module.exports = {addUser, removeUser, getUser, getUserInRoom, changeUserName};

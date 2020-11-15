@@ -8,6 +8,9 @@ const io = socketio(server);
 const router = require('./router');
 const { disconnect } = require('process');
 const { urlencoded } = require('express');
+const cors = require('cors');
+
+app.use(cors());
 const PORT = process.env.PORT || 8080;
 let cookie = new Set();
 
